@@ -7,7 +7,6 @@ function World(x, y) {
     this.x = x;
     this.y = y;
     this.cells = [[]];
-    this.selected = null;
 }
 
 /*
@@ -30,18 +29,22 @@ World.prototype.init = function() {
     for (var i = 0; i < this.x; ++i) {
         for (var j = 0; j < this.y; ++j) {
             var n = [];
-            if (i > 0) {
+            if (i > 0)
                 n.push(this.cells[i - 1][j]);
-            }
-            if (i < this.x - 1) {
+            if (i < this.x - 1)
                 n.push(this.cells[i + 1][j]);
-            }
-            if (j > 0) {
+            if (j > 0)
                 n.push(this.cells[i][j - 1]);
-            }
-            if (j < this.y - 1) {
+            if (j < this.y - 1)
                 n.push(this.cells[i][j + 1]);
-            }
+            if (i > 0 && j > 0)
+                n.push(this.cells[i - 1][j-1]);
+            if (i > 0 && j < this.y - 1)
+                n.push(this.cells[i - 1][j+1]);
+            if (i < this.x - 1 && j > 0)
+                n.push(this.cells[i+1][j-1]);
+            if (i < this.x - 1  && j < this.y - 1)
+                n.push(this.cells[i + 1][j+1]);
             this.cells[i][j].neighbors = n;
         }
     }
@@ -57,12 +60,12 @@ World.prototype.update = function() {
             this.cells[i][j].update();
         }
     }
-
-    window.setTimeout(this.update.bind(this), Math.max(0, game.speed + startTime - Date.now()));
+    game.generation++;
+    if (game.start) window.setTimeout(this.update.bind(this), Math.max(0, game.speed + startTime - Date.now()));
 };
 
 /*
- * Draws the cell grid including thin borders. The fill color depends on the
+ * Draws the cell grid including thin borders. The fill  color depends on the
  * life of the cell. The selected cell is highlighted by a red border and an
  * inverted rectangle.
  */
@@ -72,17 +75,14 @@ World.prototype.draw = function() {
 
     for (var i = 0; i < this.x; ++i) {
         for (var j = 0; j < this.y; ++j) {
-            var val = Math.round(255 * this.cells[i][j].life / 100);
+            var val = this.cells[i][j].nextLife ? 255 : 0;
+            this.cells[i][j].life = this.cells[i][j].nextLife;
             context.fillStyle = "rgb(0, " + val + ", 0)";
             context.fillRect(i * this.width, j * this.height, this.width, this.height);
-            if (this.selected === this.cells[i][j]) {
-                context.strokeStyle = "rgb(255, 150, 100)";
-                context.lineWidth = 2;
-                context.strokeRect(i * this.width + 1, j * this.height + 1, this.width - 2, this.height - 2);
-                context.strokeStyle = "rgb(0, " + (255 - val) + ", 0)";
-                context.lineWidth = 4;
-                context.strokeRect(i * this.width + 8, j * this.height + 8, this.width - 16, this.height - 16);
-            }
+
+            //context.strokeStyle = "grey";
+            //context.lineWidth = 1;
+            //context.strokeRect(i * this.width, j * this.height, this.width, this.height);
         }
     }
 
@@ -101,26 +101,8 @@ World.prototype.select = function(x, y) {
             var dx = x - i * this.width;
             var dy = y - j * this.height;
             if (dx > 0 && dx < this.width && dy > 0 && dy < this.height) {
-                if (this.selected === this.cells[i][j]) {
-                    return new SelectionEvent(this.selected, null);
-                } else {
-                    return new SelectionEvent(this.selected, this.cells[i][j]);
-                }
+                return new SelectionEvent(this.cells[i][j]);
             }
         }
     }
-};
-
-/*
- * Calculates the average life in the world.
- */
-World.prototype.average = function() {
-    var average = 0;
-    for (var i = 0; i < this.x; ++i) {
-        for (var j = 0; j < this.y; ++j) {
-            average += this.cells[i][j].life;
-        }
-    }
-    average /= this.x * this.y;
-    return Math.round(average);
 };

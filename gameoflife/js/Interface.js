@@ -10,12 +10,14 @@ function Interface() {
  * Initializes the interface by creating and positioning all components.
  */
 Interface.prototype.init = function() {
-    this.components.push(new Status(0, 0, 50, 50));
-    this.components.push(new Button(220, 10, "kill", new LifeEvent(0)));
-    this.components.push(new Button(320, 10, "heal", new LifeEvent(100)));
-    this.components.push(new Button(420, 10, "undo", new UndoEvent()));
-    this.components.push(new Button(520, 10, "redo", new RedoEvent()));
-    this.components.push(new Slider(620, 5, 260, 40, 0));
+    this.components.push(new Status(0, 0, 200, 50));
+    this.components.push(new Button(220, 10, "Start", new ControlEvent(true)));
+    this.components.push(new Button(320, 10, "Stop", new ControlEvent(false)));
+    this.components.push(new Button(420, 10, "Reset", new ResetEvent()));
+    this.components.push(new Button(520, 10, "Random", null));
+    this.components.push(new Button(620, 10, "undo", new UndoEvent()));
+    this.components.push(new Button(720, 10, "redo", new RedoEvent()));
+    this.components.push(new Slider(820, 5, 260, 40, 0));
 };
 
 /*
@@ -35,7 +37,7 @@ Interface.prototype.draw = function() {
         this.components[i].draw(context);
     }
 
-    context.strokeRect(0.5, 0.5, canvas.width - 1, 199);
+    context.strokeRect(0.5, 0.5, canvas.width - 1, 49);
     context.restore();
 };
 
@@ -50,9 +52,13 @@ Interface.prototype.click = function(x, y) {
             // Sliders don't have an event yet, so they're handled explicitly..
             if (this.components[i] instanceof Slider) {
                 var c = this.components[i];
-                return new SpeedEvent(20+ 100* (x - c.x) / c.w,c);
-            }
-            return this.components[i].event;
+                return new SpeedEvent(100+ 500* (x - c.x) / c.w,c);
+            }else if(this.components[i].disable){
+                return null;
+            }else if(this.components[i].text == "Random")
+            {
+                return new RandomEvent();
+            }else return this.components[i].event;
         }
     }
 };

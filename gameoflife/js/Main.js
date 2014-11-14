@@ -4,7 +4,7 @@
 $(document).ready(function() {
     canHeight = $(window).get(0).innerHeight;
     canWidth = $(window).get(0).innerWidth;
-    canWidth = canWidth < 900? 900: canWidth;
+    canWidth = canWidth < 1100? 1100: canWidth;
     $("canvas").attr("width", canWidth);
     $("canvas").attr("height", canHeight);
     game = new Game();

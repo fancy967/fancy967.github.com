@@ -3,12 +3,14 @@
  * undo and redo, the user interface and the world.
  */
 function Game() {
-    this.speed = 20;
+    this.speed = 100;
     this.eventQueue = [];
     this.undoStack = [];
     this.redoStack = [];
     this.world = new World(Math.floor(canWidth / 30), Math.floor((canHeight - 50) / 30));
     this.interface = new Interface();
+    this.start = false;
+    this.generation = -1;
 }
 
 /*
@@ -65,12 +67,18 @@ Game.prototype.click = function(e) {
     var y = e.y - canvas.offsetTop;
     var event;
 
-    if (y < canvas.height - 50) {
+    if (y < canvas.height - 50 && this.start) {
+        return;
+    }else if(y < canvas.height - 50){
         event = this.world.select(x, y);
     } else {
         event = this.interface.click(x, y);
     }
-    if (event) {
+
+    if (event && event.needPush) {
         this.eventQueue.push(event);
+    }else if(event)
+    {
+        event.commit(game);
     }
 };
