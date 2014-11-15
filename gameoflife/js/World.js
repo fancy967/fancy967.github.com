@@ -55,13 +55,20 @@ World.prototype.init = function() {
  */
 World.prototype.update = function() {
     var startTime = Date.now();
+    var canStop = true;
     for (var i = 0; i < this.x; ++i) {
         for (var j = 0; j < this.y; ++j) {
             this.cells[i][j].update();
+            if (this.cells[i][j].life != this.cells[i][j].nextLife) canStop = false;
         }
     }
-    game.generation++;
-    if (game.start) window.setTimeout(this.update.bind(this), Math.max(0, game.speed + startTime - Date.now()));
+    if (!canStop && game.start)
+    {
+        game.generation++;
+        window.setTimeout(this.update.bind(this), Math.max(0, game.speed + startTime - Date.now()));
+    }else if(canStop){
+        game.start = false;
+    }
 };
 
 /*

@@ -10,14 +10,14 @@ function Interface() {
  * Initializes the interface by creating and positioning all components.
  */
 Interface.prototype.init = function() {
-    this.components.push(new Status(0, 0, 200, 50));
-    this.components.push(new Button(220, 10, "Start", new ControlEvent(true)));
-    this.components.push(new Button(320, 10, "Stop", new ControlEvent(false)));
-    this.components.push(new Button(420, 10, "Reset", new ResetEvent()));
-    this.components.push(new Button(520, 10, "Random", null));
-    this.components.push(new Button(620, 10, "undo", new UndoEvent()));
-    this.components.push(new Button(720, 10, "redo", new RedoEvent()));
-    this.components.push(new Slider(820, 5, 260, 40, 0));
+    this.components.push(new Status(0, 0, 150, 50));
+    this.components.push(new Button(170, 10, "Start", new ControlEvent(true)));
+    this.components.push(new Button(270, 10, "Stop", new ControlEvent(false)));
+    this.components.push(new Button(370, 10, "Reset", new ResetEvent()));
+    this.components.push(new Button(470, 10, "Random", null));
+    this.components.push(new Button(570, 10, "undo", new UndoEvent()));
+    this.components.push(new Button(670, 10, "redo", new RedoEvent()));
+    this.components.push(new Slider(770, 5, 260, 40, 0));
 };
 
 /*

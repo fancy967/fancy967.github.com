@@ -40,6 +40,7 @@ ResetEvent.prototype.commit = function(game) {
             game.world.cells[i][j].nextLife = false;
         }
     }
+    game.generation = 0;
 };
 
 ResetEvent.prototype.revert = function(game) {

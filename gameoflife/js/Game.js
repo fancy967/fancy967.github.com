@@ -10,7 +10,7 @@ function Game() {
     this.world = new World(Math.floor(canWidth / 30), Math.floor((canHeight - 50) / 30));
     this.interface = new Interface();
     this.start = false;
-    this.generation = -1;
+    this.generation = 0;
 }
 
 /*
