@@ -2,12 +2,13 @@
  * The Game class is the central unit, it holds the event queue, stacks for
  * undo and redo, the user interface and the world.
  */
-function Game() {
+function Game(canWidth, canHeight) {
     this.speed = 100;
     this.eventQueue = [];
     this.undoStack = [];
     this.redoStack = [];
-    this.world = new World(Math.floor(canWidth / 30), Math.floor((canHeight - 50) / 30));
+    this.btmHeight = 50;
+    this.world = new World(Math.floor(canWidth / 35), Math.floor((canHeight - this.btmHeight) / 35));
     this.interface = new Interface();
     this.start = false;
     this.generation = 0;
@@ -24,8 +25,8 @@ Game.prototype.init = function() {
     this.world.init();
     this.interface.init();
 
-    this.update();
-    this.world.update();
+     this.update();
+    //this.world.update();
 };
 
 /*
@@ -67,9 +68,9 @@ Game.prototype.click = function(e) {
     var y = e.y - canvas.offsetTop;
     var event;
 
-    if (y < canvas.height - 50 && this.start) {
+    if (y < canvas.height - this.btmHeight && this.start) {
         return;
-    }else if(y < canvas.height - 50){
+    }else if(y < canvas.height - this.btmHeight){
         event = this.world.select(x, y);
     } else {
         event = this.interface.click(x, y);

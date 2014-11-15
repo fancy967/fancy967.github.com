@@ -15,7 +15,7 @@ function World(x, y) {
 World.prototype.init = function() {
     var canvas = document.getElementById("canvas");
     this.width = canvas.width / this.x;
-    this.height = (canvas.height - 50) / this.y;
+    this.height = (canvas.height - game.btmHeight) / this.y;
     this.cells = Array(this.x);
 
     for (var i = 0; i < this.x; ++i) {
@@ -54,19 +54,22 @@ World.prototype.init = function() {
  * Updates every cell.
  */
 World.prototype.update = function() {
-    var startTime = Date.now();
-    var canStop = true;
-    for (var i = 0; i < this.x; ++i) {
-        for (var j = 0; j < this.y; ++j) {
-            this.cells[i][j].update();
-            if (this.cells[i][j].life != this.cells[i][j].nextLife) canStop = false;
-        }
-    }
-    if (!canStop && game.start)
+    var canStop = false;
+    if (game.start)
     {
+        var startTime = Date.now();
+        var canStop = true;
+        for (var i = 0; i < this.x; ++i) {
+            for (var j = 0; j < this.y; ++j) {
+                this.cells[i][j].update();
+                if (this.cells[i][j].life != this.cells[i][j].nextLife) canStop = false;
+            }
+        }
         game.generation++;
         window.setTimeout(this.update.bind(this), Math.max(0, game.speed + startTime - Date.now()));
-    }else if(canStop){
+    }
+    if(canStop){
+        if (game.generation != 1) game.generation--;
         game.start = false;
     }
 };

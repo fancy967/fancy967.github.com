@@ -21,7 +21,7 @@ Status.prototype.constructor = Status;
 Status.prototype.draw = function(context) {
     context.save();
     var text;
-    text = "Generation = " + game.generation;
+    text = "Gen = " + game.generation;
     context.fillStyle = "rgba(255, 255, 255, 0.8)";
     context.fillRect(this.x, this.y, this.w, this.h);
     

@@ -2,7 +2,7 @@
  * Simple button component with a text and an event.
  */
 function Button(x, y, text, event) {
-    Component.call(this, x, y, 80, 30);
+    Component.call(this, x, y, 80, 40);
     this.text = text;
     this.event = event;
     this.disable = true;

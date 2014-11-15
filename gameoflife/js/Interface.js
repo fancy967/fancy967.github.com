@@ -10,14 +10,14 @@ function Interface() {
  * Initializes the interface by creating and positioning all components.
  */
 Interface.prototype.init = function() {
-    this.components.push(new Status(0, 0, 150, 50));
-    this.components.push(new Button(170, 10, "Start", new ControlEvent(true)));
-    this.components.push(new Button(270, 10, "Stop", new ControlEvent(false)));
-    this.components.push(new Button(370, 10, "Reset", new ResetEvent()));
-    this.components.push(new Button(470, 10, "Random", null));
-    this.components.push(new Button(570, 10, "undo", new UndoEvent()));
-    this.components.push(new Button(670, 10, "redo", new RedoEvent()));
-    this.components.push(new Slider(770, 5, 260, 40, 0));
+    this.components.push(new Status(0, 0, 100, game.btmHeight));
+    this.components.push(new Button(120, 5, "Start", new ControlEvent(true)));
+    this.components.push(new Button(220, 5, "Stop", new ControlEvent(false)));
+    this.components.push(new Button(320, 5, "Reset", new ResetEvent()));
+    this.components.push(new Button(420, 5, "Random", null));
+    this.components.push(new Button(520, 5, "undo", new UndoEvent()));
+    this.components.push(new Button(620, 5, "redo", new RedoEvent()));
+    this.components.push(new Slider(720, 5, 260, 40, 0));
 };
 
 /*
@@ -29,15 +29,15 @@ Interface.prototype.draw = function() {
     var context = canvas.getContext("2d");
     context.save();
 
-    context.translate(0, canvas.height - 51);
+    context.translate(0, canvas.height - game.btmHeight - 1);
     context.fillStyle = "rgb(200, 200, 200)";
-    context.fillRect(0, 0, canvas.width, 50);
+    context.fillRect(0, 0, canvas.width, game.btmHeight);
 
     for (var i = 0; i < this.components.length; ++i) {
         this.components[i].draw(context);
     }
 
-    context.strokeRect(0.5, 0.5, canvas.width - 1, 49);
+    context.strokeRect(0.5, 0.5, canvas.width - 1, game.btmHeight - 1);
     context.restore();
 };
 
@@ -48,7 +48,7 @@ Interface.prototype.click = function(x, y) {
     var canvas = document.getElementById("canvas");
 
     for (var i = 0; i < this.components.length; ++i) {
-        if (this.components[i].within(x, y - canvas.height + 50)) {
+        if (this.components[i].within(x, y - canvas.height + game.btmHeight)) {
             // Sliders don't have an event yet, so they're handled explicitly..
             if (this.components[i] instanceof Slider) {
                 var c = this.components[i];
