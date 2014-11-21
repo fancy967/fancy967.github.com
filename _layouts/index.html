@@ -111,7 +111,7 @@
                 <div class="features">
                     {% for post in site.posts %}
                     <article>
-                        <img src="images/pic01.jpg" alt=""/>
+                        <a href="{{ site.baseurl }}{{ post.url }}" class="image"><img src="images/pic01.jpg" alt=""></a>
                         <div class="inner">
                             <h4><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h4>
 
