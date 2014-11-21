@@ -114,8 +114,8 @@
                         <a href="{{ site.baseurl }}{{ post.url }}" class="image"><img src="images/pic01.jpg" alt=""></a>
                         <div class="inner">
                             <h4><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h4>
-
-                            <p>{{ post.excerpt }}</p>
+                            <h6>{{ post.date | date_to_string }}</h6>
+                            <p>{{ post.excerpt | strip_html }}</p>
                         </div>
                     </article>
                     {% endfor %}
