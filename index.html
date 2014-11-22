@@ -119,7 +119,7 @@
                             <h4><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h4>
                             <h6>{{ post.date | date_to_string }}</h6>
 
-                            <p>{{ post.excerpt | strip_html | truncatewords: 50 }}</p>
+                            <p>{{ post.excerpt | strip_html | truncatewords: 100 }}</p>
                         </div>
                     </article>
                     {% endfor %}
