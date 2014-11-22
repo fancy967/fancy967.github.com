@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: 你好，世界
 ---
 ##MaHua是什么?
