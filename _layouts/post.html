@@ -66,9 +66,9 @@
                 <header class="major">
                     <h2>{{ page.title }}</h2>
 
-                    <p>{{ post.date }}</p>
+                    <p>{{ post.date | date_to_long_string }}</p>
                 </header>
-                <p>{{ page.content }}</p>
+                <p>{{ content }}</p>
             </div>
         </section>
 
