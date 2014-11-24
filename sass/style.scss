@@ -1,6 +1,8 @@
+@charset "utf-8";
 @import 'vars';
 @import 'mixins';
 @import 'font-awesome.min.css';
+@import url('http://fonts.useso.com/css?family=Lato:400,400italic,700,700italic|Source+Code+Pro:400');
 
 /*
 	Read Only by HTML5 UP
@@ -806,7 +808,11 @@ $size-header: 23em;
 			border-top: solid ($size-border-width * 1.5) $color-border;
 			margin-bottom: $size-element-margin;
 			padding-top: $size-element-margin;
-			
+
+			h4{
+			  margin: 0px;
+			}
+
 			&:first-child {
 				border-top: 0;
 				padding-top: 0;
@@ -895,23 +901,22 @@ $size-header: 23em;
 				font-style: italic;
 				margin: 1em 0 0 0;
 			}
-		}
 
-		> footer {
-			bottom: 0;
-			left: 0;
-			padding: 2em;
-			position: absolute;
-			width: 100%;
-			
-			.icons {
+			> footer {
+			  bottom: 0;
+			  left: 0;
+			  padding: 1em 0 0 0;
+			  width: 100%;
+
+			  .icons {
 				margin: 0;
-				
+
 				li {
-					a {
-						color: $color-header-fg-light;
-					}
+				  a {
+					color: $color-header-fg-light;
+				  }
 				}
+			  }
 			}
 		}
 		
@@ -969,8 +974,23 @@ $size-header: 23em;
 			
 			> .container {
 				padding: 6em 0 4em 0;
+
+			  	.title{
+				  h2{
+					margin-bottom: 0px;
+				  }
+				}
+
+				.content{
+				  h1,h2,h3,h4,h5,h6{
+					margin:0.3em 0px;
+				  }
+				  p,ul{
+					margin-bottom: 0px;
+				  }
+				}
 			}
-			
+
 			&:first-child {
 				border-top: 0;
 			}
@@ -1024,4 +1044,10 @@ $size-header: 23em;
 				}
 			}
 		}
+	}
+
+/* Add */
+
+	ul.actions.pagination{
+	  padding-top: $size-element-margin*2;
 	}

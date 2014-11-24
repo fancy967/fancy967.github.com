@@ -1,3 +1,4 @@
+@charset "utf-8";
 @import 'vars';
 @import 'mixins';
 
@@ -21,11 +22,7 @@ $size-header: 21em;
 		width: $size-header;
 
 		> header {
-			padding: 2em;
-		}
-
-		> footer {
-			padding: 1.5em;
+			padding: 2em 2em 1em 2em;
 		}
 	}
 	

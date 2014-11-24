@@ -1,0 +1,112 @@
+---
+---
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Read Only by HTML5 UP</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="/css/ie/html5shiv.js"></script><![endif]-->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollzer.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/skel-layers.min.js"></script>
+    <script src="/js/init.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="/css/skel.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+        <link rel="stylesheet" href="/css/style-xlarge.css" />
+    </noscript>
+    <!--[if lte IE 8]><link rel="stylesheet" href="/css/ie/v8.css" /><![endif]-->
+</head>
+<body>
+<div id="wrapper">
+
+    <!-- Header -->
+    <section id="header" class="skel-layers-fixed">
+        {% include header.html %}
+        <nav id="nav">
+            <ul>
+                <li><a href="/">Back to Homepage</a></li>
+                <li><a href="#one" class="active">Article List</a></li>
+            </ul>
+        </nav>
+    </section>
+
+    <!-- Main -->
+    <div id="main">
+
+        <!-- Three -->
+        <section id="one">
+            <div class="container">
+                <h3>Article List</h3>
+                <p>Integer eu ante ornare amet commetus vestibulum blandit integer in curae ac faucibus integer non. Adipiscing cubilia elementum integer. Integer eu ante ornare amet commetus.</p>
+                <div class="features">
+                    {% for post in paginator.posts %}
+                    <article>
+                        <a href="{{ site.baseurl }}{{ post.url }}" class="image">
+                            {% if !post.picid %}
+                            <img src="/images/{{ post.picid }}" alt="" />
+                            {% else %}
+                            <img src="/images/pic-default.jpg" alt="" />
+                            {% endif %}
+                        </a>
+                        <div class="inner">
+                            <h4><a href="{{ site.baseurl }}{{ post.url }}">{{ post.title }}</a></h4>
+                            <h6>{{ post.date | date_to_string }}</h6>
+                            <p>{{ post.excerpt | strip_html}}</p>
+                        </div>
+                    </article>
+                    {% endfor %}
+                </div>
+
+                <ul class="actions fit pagination">
+                    <li>
+                    {% if paginator.previous_page %}
+                    {% if paginator.previous_page == 1 %}
+                    <a href="/blog/" class="button special icon fa-arrow-left">Previous</a>
+                    {% else %}
+                    <a href="{{ paginator.previous_page_path }}" class="button special icon fa-arrow-left">Previous</a>
+                    {% endif %}
+                    {% else %}
+                    <span class="button icon fa-arrow-left disabled">Previous</span>
+                    {% endif %}
+                    </li>
+
+                    <li class="align-center">
+                    {% if paginator.page == 1 %}
+                    <a href="#" class="button special">1</a>
+                    {% else %}
+                    <a href="/blog/" class="button alt">1</a>
+                    {% endif %}
+
+                    {% for count in (2..paginator.total_pages) %}
+                    {% if count == paginator.page %}
+                    <a href="#" class="button special">{{ count }}</a>
+                    {% else %}
+                    <a href="/blog/page{{ count }}" class="button alt">{{ count }}</a>
+                    {% endif %}
+                    {% endfor %}
+                    </li>
+
+                    <li class="align-right">
+                    {% if paginator.next_page %}
+                    <a href="{{ paginator.next_page_path }}" class="button special icon fa-arrow-right">Next</a>
+                    {% else %}
+                    <span class="button icon fa-arrow-right disabled">Next</span>
+                    {% endif %}
+                    </li>
+                </ul>
+
+            </div>
+        </section>
+
+    </div>
+    <!-- Footer -->
+    {% include footer.html %}
+
+</div>
+</body>
+</html>

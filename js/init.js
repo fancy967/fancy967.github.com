@@ -8,28 +8,12 @@
 	skel.init({
 		reset: 'full',
 		breakpoints: {
-			global: {href: '/css/style.css', containers: '45em', grid: {gutters: {vertical: '2em', horizontal: 0}}},
-			xlarge: {media: '(max-width: 1680px)', href: '/css/style-xlarge.css'},
-			large: {
-				media: '(max-width: 1280px)',
-				href: '/css/style-large.css',
-				containers: '42em',
-				grid: {gutters: {vertical: '1.5em'}},
-				viewport: {scalable: false}
-			},
-			medium: {
-				media: '(max-width: 1024px)',
-				href: '/css/style-medium.css',
-				containers: '85%',
-				grid: {collapse: 1}
-			},
-			small: {
-				media: '(max-width: 736px)',
-				href: '/css/style-small.css',
-				containers: '90%',
-				grid: {gutters: {vertical: '1.25em'}}
-			},
-			xsmall: {media: '(max-width: 480px)', href: '/css/style-xsmall.css', grid: {collapse: 2}}
+			global: { href: '/css/style.css', containers: '45em', grid: { gutters: { vertical: '2em', horizontal: 0 } } },
+			xlarge: { media: '(max-width: 1680px)', href: '/css/style-xlarge.css' },
+			large: { media: '(max-width: 1280px)', href: '/css/style-large.css', containers: '42em', grid: { gutters: { vertical: '1.5em' } }, viewport: { scalable: false } },
+			medium: { media: '(max-width: 1024px)', href: '/css/style-medium.css', containers: '85%', grid: { collapse: 1 } },
+			small: { media: '(max-width: 736px)', href: '/css/style-small.css', containers: '90%', grid: { gutters: { vertical: '1.25em' } } },
+			xsmall: { media: '(max-width: 480px)', href: '/css/style-xsmall.css', grid: { collapse: 2 } }
 		},
 		plugins: {
 			layers: {
